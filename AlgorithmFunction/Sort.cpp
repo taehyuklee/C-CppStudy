@@ -6,8 +6,15 @@ using namespace std;
 
 std::vector<int> a; //vector도 std namespace안에 있다. (처음에는 다 이렇게 표기하자) 
 int b[5];
+std::vector<pair<int, int>> v; // vector(as like list)안에 다른 자료구조를 넣었을때 예를 들어 piar, tuple 등 
+std::vector<pair<int, int>> v1;
+
+bool cmp(pair<int, int> a, pair<int, int> b){
+	return a.first > b.first;
+}
 
 int main(){
+	
 	for (int i=5; i>=1; i--){
 		b[i-1] = i; // b[0] ~ b[4]까지 있으니까 
 	}
@@ -45,6 +52,31 @@ int main(){
 	cout << '\n';
 	for (int i :a) cout << i << ' ';
 	cout << '\n';	  
+	
+	
+	//vector안에 다른 자료구조 예를 들어 pair나 또 다른 vector가 있어도 sort가 될수 있을까?
+	for(int i=10; i>=1; i--){
+		v.push_back({i, 10-i});
+	} 
+	
+	sort(v.begin(), v.end()); //pair 자료구조의 첫 번째 인자를 기준으로 sort가 된다. 
+	
+	for(auto it : v) cout << it.first << ":" << it.second << "\n";
+	
+	//참고로 여기서 auto는 형이 정해져 있지 않은 형을 뜻한다. Java에서 var로 받아오는 것과 같은 의미이다.
+	//가끔 시간이 없을때 pair<int, int>보다 auto가 코드가 좀 더 짧게 먹기 때문에 좋다. 물론 동적으로 받는 것이기에 무슨 부작용이 있을지 모른다.
+	//auto는 pair, tuple, struct에 있는 값을 기반으로 순회할 때 쓰면 좀 더 빠르게 코드를 짤수 있다. 
+	
+	for (int i=10; i>=1; i--){
+		v1.push_back({i, 10-i});
+	}
+	
+	sort(v1.begin(), v1.end(), cmp);
+	
+	for(auto it : v) cout << it.first << ":" << it.second << "\n";
+	
+	//Operator는 struct를 설명할때 자세히 배운다고 한다. 
+	
 	
 	return 0;
 }
