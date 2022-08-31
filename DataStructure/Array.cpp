@@ -11,6 +11,9 @@
 #include<iostream>
 #include<algorithm>
 
+#define M 3
+#define N 4
+
 using namespace std;
 
 int v[10];
@@ -29,9 +32,7 @@ int main(){
 	fill(v, v+10, 10); //fill은 동적 배열이든 정적 배열이든 둘 다 해당된다.랴노 
 	for(int a: v) cout << a << " ";
 	cout << '\n';
-	
-	//vector에 비해 erase, push_back, front, back 등의 다양한 method들이 존재하지 않기때문에 거의 index접근하고 index로 넣어줘야 한다. 
-	
+
 	return 0; 
 	
 }
