@@ -1,1 +1,1 @@
-This Repository is for Cpp Gramar Study
+This Repository is for C/C++ programming with null null developer
