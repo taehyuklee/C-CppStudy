@@ -18,7 +18,7 @@ void testPointer(){
 
 }
 
-int TestAndSet(int* lockPtr){
+int TestAndSet(volatile int* lockPtr){
 	int oldLock = *lockPtr;
 	*lockPtr = 1;
 	return oldLock;
@@ -32,14 +32,15 @@ void criticalSection(){
 	std::cout << sum << std::endl;
 }
 
-void lockup(int lock){
-	while(TestAndSet(&lock)==1){
+// 여기서 처음에 int lock으로 넘겨줬는데 이건 call-by-value로 인자를 복사했다. 하지만 참조로 하여 보내야만 lock을 공유할 수 있다. 
+void lockup(volatile int* lock){
+	while(TestAndSet(lock)==1){
 		
 	};
 }
 
-void unlock(int lock){
-	lock=0;
+void unlock(volatile  int* lock){
+	*lock=0;
 }
 
 
@@ -48,10 +49,10 @@ int main(void){
 	
 	volatile int lock =0;
 	
-	lockup(lock);
+	lockup(&lock);
 	
 	criticalSection();
 	
-	unlock(lock);
+	unlock(&lock);
 	
 }
